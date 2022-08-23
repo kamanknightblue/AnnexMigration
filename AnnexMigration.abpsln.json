@@ -1,0 +1,7 @@
+{
+  "modules": {
+    "AnnexMigration": {
+      "path": "AnnexMigration.abpmdl.json"
+    }
+  }
+}

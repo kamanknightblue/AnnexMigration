@@ -1,0 +1,79 @@
+{
+  "folders": {
+    "items": {
+      "src": {},
+      "test": {},
+      "host": {}
+    }
+  },
+  "packages": {
+    "AnnexMigration.Domain.Shared": {
+      "path": "src/AnnexMigration.Domain.Shared/AnnexMigration.Domain.Shared.abppkg.json",
+      "folder": "src"
+    },
+    "AnnexMigration.Domain": {
+      "path": "src/AnnexMigration.Domain/AnnexMigration.Domain.abppkg.json",
+      "folder": "src"
+    },
+    "AnnexMigration.Application.Contracts": {
+      "path": "src/AnnexMigration.Application.Contracts/AnnexMigration.Application.Contracts.abppkg.json",
+      "folder": "src"
+    },
+    "AnnexMigration.Application": {
+      "path": "src/AnnexMigration.Application/AnnexMigration.Application.abppkg.json",
+      "folder": "src"
+    },
+    "AnnexMigration.EntityFrameworkCore": {
+      "path": "src/AnnexMigration.EntityFrameworkCore/AnnexMigration.EntityFrameworkCore.abppkg.json",
+      "folder": "src"
+    },
+    "AnnexMigration.MongoDB": {
+      "path": "src/AnnexMigration.MongoDB/AnnexMigration.MongoDB.abppkg.json",
+      "folder": "src"
+    },
+    "AnnexMigration.HttpApi": {
+      "path": "src/AnnexMigration.HttpApi/AnnexMigration.HttpApi.abppkg.json",
+      "folder": "src"
+    },
+    "AnnexMigration.HttpApi.Client": {
+      "path": "src/AnnexMigration.HttpApi.Client/AnnexMigration.HttpApi.Client.abppkg.json",
+      "folder": "src"
+    },
+    "AnnexMigration.TestBase": {
+      "path": "test/AnnexMigration.TestBase/AnnexMigration.TestBase.abppkg.json",
+      "folder": "test"
+    },
+    "AnnexMigration.EntityFrameworkCore.Tests": {
+      "path": "test/AnnexMigration.EntityFrameworkCore.Tests/AnnexMigration.EntityFrameworkCore.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "AnnexMigration.MongoDB.Tests": {
+      "path": "test/AnnexMigration.MongoDB.Tests/AnnexMigration.MongoDB.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "AnnexMigration.Domain.Tests": {
+      "path": "test/AnnexMigration.Domain.Tests/AnnexMigration.Domain.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "AnnexMigration.Application.Tests": {
+      "path": "test/AnnexMigration.Application.Tests/AnnexMigration.Application.Tests.abppkg.json",
+      "folder": "test"
+    },
+    "AnnexMigration.HttpApi.Host": {
+      "path": "host/AnnexMigration.HttpApi.Host/AnnexMigration.HttpApi.Host.abppkg.json",
+      "folder": "host"
+    },
+    "AnnexMigration.HttpApi.Client.ConsoleTestApp": {
+      "path": "test/AnnexMigration.HttpApi.Client.ConsoleTestApp/AnnexMigration.HttpApi.Client.ConsoleTestApp.abppkg.json",
+      "folder": "test"
+    },
+    "AnnexMigration.IdentityServer": {
+      "path": "host/AnnexMigration.IdentityServer/AnnexMigration.IdentityServer.abppkg.json",
+      "folder": "host"
+    },
+    "AnnexMigration.Host.Shared": {
+      "path": "host/AnnexMigration.Host.Shared/AnnexMigration.Host.Shared.abppkg.json",
+      "folder": "host"
+    }
+  }
+}

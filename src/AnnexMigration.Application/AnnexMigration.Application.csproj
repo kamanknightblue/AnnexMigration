@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <RootNamespace>AnnexMigration</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HunanZondy.Oss.Application" Version="1.5.1" />
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="5.3.3" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="5.3.3" />
+    <ProjectReference Include="..\AnnexMigration.Application.Contracts\AnnexMigration.Application.Contracts.csproj" />
+    <ProjectReference Include="..\AnnexMigration.Domain\AnnexMigration.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
