@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 
 namespace AnnexMigration.Annexes
@@ -8,6 +9,6 @@ namespace AnnexMigration.Annexes
     /// </summary>
     public interface IAnnexAppService : IApplicationService
     {
-
+        Task<bool> CaseAnnexAsync();
     }
 }

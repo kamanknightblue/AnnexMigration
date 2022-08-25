@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using AnnexMigration.SNKModel;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
@@ -12,9 +13,15 @@ public class AnnexMigrationEntityFrameworkCoreModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
-        context.Services.AddAbpDbContext<AnnexMigrationDbContext>(options =>
+        context.Services.AddAbpDbContext<HSBDCBZB2022Context>(options =>
         {
-                options.AddDefaultRepositories(includeAllEntities:true);
+            options.AddDefaultRepositories(includeAllEntities: true);
         });
+
+        context.Services.AddAbpDbContext<WorkflowDbContext>(options =>
+        {
+            options.AddDefaultRepositories(includeAllEntities: true);
+        });
+
     }
 }

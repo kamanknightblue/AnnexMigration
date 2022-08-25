@@ -1,9 +1,11 @@
+using AnnexMigration.Annexes;
 using AnnexMigration.EntityFrameworkCore;
 using AnnexMigration.MongoDB;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
@@ -24,6 +26,7 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.MultiTenancy;
 using Volo.Abp.Swashbuckle;
+using Volo.Abp.Threading;
 using Volo.Abp.VirtualFileSystem;
 
 namespace AnnexMigration;
@@ -32,15 +35,9 @@ namespace AnnexMigration;
     typeof(AnnexMigrationApplicationModule),
     typeof(AnnexMigrationEntityFrameworkCoreModule),
     typeof(AnnexMigrationMongoDbModule),
-    typeof(AnnexMigrationHttpApiModule),
     typeof(AbpAspNetCoreMvcUiMultiTenancyModule),
     typeof(AbpAutofacModule),
-    //typeof(AbpCachingStackExchangeRedisModule),
     typeof(AbpEntityFrameworkCoreSqlServerModule),
-    //typeof(AbpAuditLoggingEntityFrameworkCoreModule),
-    //typeof(AbpPermissionManagementEntityFrameworkCoreModule),
-    //typeof(AbpSettingManagementEntityFrameworkCoreModule),
-    //typeof(AbpTenantManagementEntityFrameworkCoreModule),
     typeof(AbpAspNetCoreSerilogModule),
     typeof(AbpSwashbuckleModule)
     )]
@@ -54,7 +51,16 @@ public class AnnexMigrationHttpApiHostModule : AbpModule
 
         Configure<AbpDbContextOptions>(options =>
         {
-            options.UseSqlServer();
+            options.Configure(ctx =>
+            {
+                switch (ctx.ConnectionStringName)
+                {
+                    case AnnexMigrationDbProperties.ConnectionStringName: ctx.UseSqlServer(); break;
+                    case AnnexMigrationDbProperties.HSBDCBZB2022ConnectionStringName: ctx.UseSqlServer(); break;
+                    case AnnexMigrationDbProperties.WorkflowConnectionStringName: ctx.UseNpgsql().UseSnakeCaseNamingConvention(); break;
+                }
+            });
+            
         });
 
         if (hostingEnvironment.IsDevelopment())
@@ -76,9 +82,12 @@ public class AnnexMigrationHttpApiHostModule : AbpModule
             },
             options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo {Title = "AnnexMigration API", Version = "v1"});
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "附件信息迁移工具", Version = "v1" });
                 options.DocInclusionPredicate((docName, description) => true);
                 options.CustomSchemaIds(type => type.FullName);
+                options.HideAbpEndpoints();
+                var xmls = Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*.xml").Where(p => Path.GetFileName(p).StartsWith(nameof(AnnexMigration)));
+                xmls.ToList().ForEach(p => options.IncludeXmlComments(p, true));
             });
 
         Configure<AbpLocalizationOptions>(options =>
@@ -118,15 +127,16 @@ public class AnnexMigrationHttpApiHostModule : AbpModule
         });
 
         var dataProtectionBuilder = context.Services.AddDataProtection().SetApplicationName("AnnexMigration");
-        if (!hostingEnvironment.IsDevelopment())
-        {
-            var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-            dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "AnnexMigration-Protection-Keys");
-        }
+        //if (!hostingEnvironment.IsDevelopment())
+        //{
+        //    var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+        //    dataProtectionBuilder.PersistKeysToStackExchangeRedis(redis, "AnnexMigration-Protection-Keys");
+        //}
 
         Configure<AbpAspNetCoreMvcOptions>(options =>
         {
-            options.ConventionalControllers.Create(typeof(AnnexMigrationApplicationModule).Assembly, opt => {
+            options.ConventionalControllers.Create(typeof(AnnexMigrationApplicationModule).Assembly, opt =>
+            {
                 // 自定义路由根路径
                 opt.RootPath = "AnnexMigration";
             });
@@ -150,6 +160,12 @@ public class AnnexMigrationHttpApiHostModule : AbpModule
                     .AllowCredentials();
             });
         });
+
+        //AsyncHelper.RunSync(async () =>
+        //{
+        //    var annexAppService = context.Services.GetRequiredService<AnnexAppService>();
+        //    await annexAppService.MigrateToMongodbAsync();
+        //});
     }
 
     public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -187,5 +203,7 @@ public class AnnexMigrationHttpApiHostModule : AbpModule
         app.UseAuditing();
         app.UseAbpSerilogEnrichers();
         app.UseConfiguredEndpoints();
+
+
     }
 }

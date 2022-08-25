@@ -10,6 +10,6 @@ public class AnnexMigrationApplicationAutoMapperProfile : Profile
         /* You can configure your AutoMapper mapping configuration here.
          * Alternatively, you can split your mapping configurations
          * into multiple profile classes for a better organization. */
-        CreateMap<Annex, AnnexDto>().IgnoreNoMap().ReverseMap();
+        //CreateMap<Annex, AnnexDto>().IgnoreNoMap().ReverseMap();
     }
 }

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Volo.Abp.Domain.Entities;
 
-namespace AnnexMigration.SNKModel
+namespace AnnexMigration.FUpfiles
 {
-    public partial class FCasematerial
+    public partial class FCasematerial:Entity
     {
         public int Id { get; set; }
         public string Caseno { get; set; }
@@ -22,5 +23,10 @@ namespace AnnexMigration.SNKModel
         public int Copies { get; set; }
         public string 入库批次 { get; set; }
         public string 预编宗地代码 { get; set; }
+        protected FCasematerial() { }
+        public override object[] GetKeys()
+        {
+            return new object[] { Id };
+        }
     }
 }

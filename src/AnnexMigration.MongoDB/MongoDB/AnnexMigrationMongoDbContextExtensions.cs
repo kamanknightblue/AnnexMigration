@@ -12,7 +12,7 @@ public static class AnnexMigrationMongoDbContextExtensions
 
         builder.Entity<Annex>(b =>
         {
-            b.CollectionName = "Annexex";
+            b.CollectionName = "OssObjects2";
         });
     }
 }

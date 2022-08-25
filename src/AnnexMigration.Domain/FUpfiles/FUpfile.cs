@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Volo.Abp.Domain.Entities;
 
-namespace AnnexMigration.SNKModel
+namespace AnnexMigration.FUpfiles
 {
-    public partial class FUpfile
+    public class FUpfile:Entity
     {
         public int Id { get; set; }
         public string Caseno { get; set; }
@@ -23,5 +24,15 @@ namespace AnnexMigration.SNKModel
         public string 入库批次 { get; set; }
         public string Fileid { get; set; }
         public string 预编宗地代码 { get; set; }
+
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        protected FUpfile() { }
+
+        public override object[] GetKeys()
+        {
+            return new object[] { Id };
+        }
     }
 }

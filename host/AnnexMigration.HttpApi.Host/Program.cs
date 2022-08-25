@@ -29,6 +29,8 @@ public class Program
         {
             Log.Information("Starting web host.");
             var builder = WebApplication.CreateBuilder(args);
+
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             builder.Host.AddAppSettingsSecretsJson()
                 .UseAutofac()
                 .UseSerilog();

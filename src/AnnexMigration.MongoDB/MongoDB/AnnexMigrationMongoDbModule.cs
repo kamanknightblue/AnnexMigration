@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.Modularity;
 using Volo.Abp.MongoDB;
+using Volo.Abp.Uow;
 
 namespace AnnexMigration.MongoDB;
 
@@ -12,6 +13,10 @@ public class AnnexMigrationMongoDbModule : AbpModule
 {
     public override void ConfigureServices(ServiceConfigurationContext context)
     {
+        Configure<AbpUnitOfWorkDefaultOptions>(options =>
+        {
+            options.TransactionBehavior = UnitOfWorkTransactionBehavior.Disabled;
+        });
         context.Services.AddMongoDbContext<AnnexMigrationMongoDbContext>(options =>
         {
             /* Add custom repositories here. Example:

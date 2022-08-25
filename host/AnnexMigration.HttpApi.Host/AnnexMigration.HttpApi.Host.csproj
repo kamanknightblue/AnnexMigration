@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EFCore.NamingConventions" Version="6.0.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
     <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0" />
     <PackageReference Include="IdentityModel" Version="6.0.0" />
@@ -19,6 +20,7 @@
     <PackageReference Include="Volo.Abp.Autofac" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.Caching.StackExchangeRedis" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc.UI.MultiTenancy" Version="5.3.3" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.PostgreSql" Version="5.3.4" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.AspNetCore.Serilog" Version="5.3.3" />
     <PackageReference Include="Volo.Abp.Swashbuckle" Version="5.3.3" />
@@ -29,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\AnnexMigration.HttpApi\AnnexMigration.HttpApi.csproj" />
     <ProjectReference Include="..\..\src\AnnexMigration.Application\AnnexMigration.Application.csproj" />
     <ProjectReference Include="..\..\src\AnnexMigration.EntityFrameworkCore\AnnexMigration.EntityFrameworkCore.csproj" />
     <ProjectReference Include="..\..\src\AnnexMigration.MongoDB\AnnexMigration.MongoDB.csproj" />
